@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Search Result</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🔍 Search Result</h1>
+
+        <h2>{{ username }}</h2>
+
+        <div class="summary">
+
+            <h3>📊 Success Rate</h3>
+
+            <div class="progress">
+                <div class="progress-fill" style="width: {{ ((found / total) * 100) | round(0) }}%;">
+                    {{ ((found / total) * 100) | round(0) }}%
+                </div>
+            </div>
+
+            <br>
+            <div class="card found-card">
+                <h3>✅ Found</h3>
+                <h2>{{ found }}</h2>
+            </div>
+
+            <div class="card notfound-card">
+                <h3>❌ Not Found</h3>
+                <h2>{{ not_found }}</h2>
+            </div>
+
+            <div class="card error-card">
+                <h3>⚠ Error</h3>
+                <h2>{{ error }}</h2>
+            </div>
+
+            <div class="card time-card">
+                <h3>⏱ Search Time</h3>
+                <h2>{{ search_time }} s</h2>
+            </div>
+
+        </div>
+
+
+        <table class="result-table">
+
+            <tr>
+                <th>Website</th>
+                <th>Status</th>
+                <th>Profile</th>
+            </tr>
+
+            {% for item in results %}
+
+            <tr>
+
+                <td>{{ item.site }}</td>
+
+                <td>
+
+                    {% if item.status=="Found" %}
+                    <span class="found">✅ Found</span>
+
+                    {% elif item.status=="Not Found" %}
+                    <span class="notfound">❌ Not Found</span>
+
+                    {% else %}
+                    <span class="error">⚠ Error</span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a href="{{ item.url }}" target="_blank">
+
+                        Open Profile
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <div class="buttons">
+            <a href="/download" class="download-btn">📥 Download CSV</a>
+
+            <a href="/" class="back-btn">⬅ Search Again</a>
+        </div>
+    </div>
+    <hr>
+
+    <footer>
+
+        <p><b>Developed By:</b> Ravi Kumar Raj</p>
+
+        <p>BCA | Lovely Professional University</p>
+
+        <p>Group 10 Project | 2026</p>
+
+    </footer>
+</body>
+
+</html>

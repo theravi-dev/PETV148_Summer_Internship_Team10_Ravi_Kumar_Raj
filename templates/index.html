@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Social Media Footprinting Tool</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🔍 Social Media Footprinting Tool</h1>
+
+        <p>
+            Search usernames across popular social media platforms.
+        </p>
+
+        <form action="/search" method="POST" onsubmit="showLoading()">
+
+            <input type="text" name="username" placeholder="Enter Username" required>
+
+            <button id="searchBtn" type="submit">
+                Search
+            </button>
+
+            <div id="loading" style="display:none; margin-top:20px;">
+                <div class="spinner"></div>
+                <p>Searching social media profiles...</p>
+            </div>
+
+        </form>
+    </div>
+    <script>
+        function showLoading() {
+
+            document.getElementById("searchBtn").innerHTML = "Searching...";
+            document.getElementById("searchBtn").disabled = true;
+
+            document.getElementById("loading").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
